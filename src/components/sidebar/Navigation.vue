@@ -26,8 +26,8 @@ export default {
 
 <style>
 #navigation_container {
-  width: 250px;
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 }
 

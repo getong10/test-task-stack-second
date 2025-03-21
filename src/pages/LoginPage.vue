@@ -16,7 +16,7 @@
 import FormView from '@/views/FormView.vue'
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseInput from '@/components/ui/BaseInput.vue';
-import MixinAuth from '@/mixins/MixinAuth';
+import MixinAuth from '@/mixins/AuthMixin';
 
 export default {
   name: 'LoginPage',

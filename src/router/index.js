@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { authState } from '@/mixins/AuthMixin'
 
 Vue.use(VueRouter)
 
@@ -26,5 +27,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' && authState.isAuth) {
+    next('/');
+  } else if (to.path !== '/login' && !authState.isAuth) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router

@@ -1,11 +1,11 @@
 <template>
-  <MainLayout v-if="checkAuth" />
+  <MainLayout v-if="this.isAuth" />
   <login-page v-else />
 </template>
 
 <script>
 import MainLayout from './layouts/MainLayout.vue'
-import MixinAuth from './mixins/MixinAuth';
+import MixinAuth from './mixins/AuthMixin';
 import LoginPage from './pages/LoginPage.vue';
 
 export default {
