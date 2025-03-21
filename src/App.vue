@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <MainLayout v-if="checkAuth" />
+  <login-page v-else />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainLayout from './layouts/MainLayout.vue'
+import MixinAuth from './mixins/MixinAuth';
+import LoginPage from './pages/LoginPage.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    MainLayout,
+    LoginPage
+  },
+  mixins: [MixinAuth],
 }
 </script>
 
 <style>
-#app {
+html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 </style>
