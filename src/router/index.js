@@ -29,10 +29,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const isInvalidPath = to.path !== '/login' && to.path !== '/' && to.path !== '/project';
+  
   if (to.path === '/login' && authState.isAuth) {
     next('/');
   } else if (to.path !== '/login' && !authState.isAuth) {
     next('/login');
+  } else if (isInvalidPath) {
+    next('/');
   } else {
     next();
   }
