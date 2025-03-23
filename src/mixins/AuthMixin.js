@@ -26,8 +26,9 @@ export default {
     isAuth() {
       return authState.isAuth;
     },
+
     currentUser() {
       return authState.currentUser;
-    }
+    },
   }
 }

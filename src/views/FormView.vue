@@ -6,8 +6,8 @@
     <div id="form_content">
       <slot name="form_content"></slot>
     </div>
-    <div id="form_footer">
-      <slot name="form_footer"></slot>
+    <div id="form_actions">
+      <slot name="form_actions"></slot>
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ export default {
 
 <style>
 #form_container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +43,12 @@ export default {
 #form_content {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+#form_actions {
+  display: flex;
+  flex-direction: row;
   gap: 10px;
 }
 </style>

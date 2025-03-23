@@ -1,11 +1,11 @@
 <template>
   <div>
-    <input
-      class="base_input"
+    <textarea
+      class="base_textarea"
       :id="id"
       :type="type"
-      :placeholder="placeholder"
-      :value="value"
+      :placeholder="placeholder" 
+      :value="value"   
       @input="$emit('input', $event.target.value)"
     />
     <slot></slot>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'BaseInput',
+  name: 'BaseTextarea',
   props: {
     id: {
       type: String,
@@ -30,26 +30,28 @@ export default {
     },
     value: {
       type: String,
-      default: 'text',
+      default: '',
     },
   },
 }
 </script>
 
 <style>
-.base_input {
+.base_textarea {
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
   border-radius: 15px;
   padding: 10px 24px;
+  resize: none;
+  height: 70px;
 }
 
-#login_input, #project_input {
+#project_textarea {
   border: 1px solid #1976d2;
 }
 
-#login_input:focus, #project_input:focus {
+#project_textarea:focus {
   outline: 2px solid #1e6ebe;
 }
 </style>
