@@ -1,16 +1,16 @@
 <template>
   <div>
-    <select :id="id" class="base_select" v-model="selectedOption">
+    <select :id="id" class="base_select" v-model="selectedOption" @change="handleChange">
       <option value="" disabled>
         <slot></slot>
       </option>
       
       <option
         v-for="option in options"
-        :key="option.id"
-        :value="option.name"
+        :key="option.id ?? option"
+        :value="option.name ?? option"
       >
-        {{ option.name }}
+        {{ option.name ?? option }}
       </option>
     </select>
   </div>
@@ -28,15 +28,26 @@ export default {
       type: Array,
       default: () => [],
     },
+    value: {
+      type: [String, Object],
+      default: '',
+    }
   },
   data() {
     return {
-      selectedOption: '',
+      selectedOption: this.value,
     };
   },
+  methods: {
+    handleChange(event) {
+      const value = event.target.value;
+      this.$emit('input', value);
+      this.$emit('onSelect', value);
+    }
+  },
   watch: {
-    selectedOption() {
-      this.$emit('onSelect', this.selectedOption);
+    value(newValue) {
+      this.selectedOption = newValue;
     },
   },
 }

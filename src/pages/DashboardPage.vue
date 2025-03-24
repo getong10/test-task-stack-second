@@ -16,8 +16,8 @@
 
           <div class="dashboard_project_progress">
             {{ 
-              project.tasks?
-                `Выполнено ${project.tasks.filter(task => task.progress==='Завершено').length} из ${project.tasks.length}`:
+              project.tasks.length>0?
+                `Выполнено ${project.tasks.filter(task => task.status==='Завершено').length} из ${project.tasks.length}`:
               'Нет задач' 
             }}
           </div>
@@ -39,6 +39,9 @@
       <template v-slot:dialog_content>
         <base-input v-model="projectData.name" :id="'project_input'" :placeholder="'Название проекта'"></base-input>
         <base-textarea v-model="projectData.description" :id="'project_textarea'" :placeholder="'Описание проекта'"></base-textarea>
+      </template>
+
+      <template v-slot:dialog_actions>
         <base-button :id="'create_button'" @click="createProject">Создать</base-button>
       </template>
     </dialog-view>
@@ -52,6 +55,9 @@
       <template v-slot:dialog_content>
         <base-input v-model="editProjectData.name" :id="'project_input'" :placeholder="'Название проекта'"></base-input>
         <base-textarea v-model="editProjectData.description" :id="'project_textarea'" :placeholder="'Описание проекта'"></base-textarea>
+      </template>
+
+      <template v-slot:dialog_actions>
         <base-button :id="'edit_button'" @click="editProject">Сохранить</base-button>
       </template>
     </dialog-view>
@@ -92,6 +98,7 @@ export default {
       projectData: {
         name: '',
         description: '',
+        tasks: [],
       },
       projects: [],
       editProjectData: {
@@ -118,7 +125,8 @@ export default {
         const newProject = {
           id: Date.now(),
           name: this.projectData.name,
-          description: this.projectData.description
+          description: this.projectData.description,
+          tasks: [],
         };
         this.projects.push(newProject);
         localStorage.setItem('projects', JSON.stringify(this.projects));
@@ -176,6 +184,7 @@ export default {
   flex-direction: column;
   padding: 20px;
   gap: 50px;
+  height: 95%;
 }
 
 #dashboard_page_header {
@@ -186,6 +195,30 @@ export default {
   padding: 10px 20px;
   font-size: 24px;
   font-weight: 600;
+}
+
+#dashboard_page_content {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#dashboard_page_content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#dashboard_page_content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+#dashboard_page_content::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+#dashboard_page_content::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 4px;
 }
 
 #dashboard_header_title {
